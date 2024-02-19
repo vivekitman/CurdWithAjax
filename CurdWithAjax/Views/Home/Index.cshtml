@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="~/Canponent/js/bootstrap.min.js"></script>
+    <script src="~/Canponent/js/bootstrap.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Canponent/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Canponent/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            $("#btns").click(function () {
+                var Name  = $("#Name").val();
+                var Mobile = $("#Mobile").val();
+                var Email = $("#Email").val();
+                var DOB = $("#DOB").val();
+
+                // Call Method Using Ajax
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/insertData",
+                    data: 'Name=' + Name + '&Mobile=' + Mobile + '&Email=' + Email + '&DOB=' + DOB,
+                    success: function (data) {
+                        alert("SAVE");
+                             $("#Name").val("");
+                         $("#Mobile").val("");
+                         $("#Email").val("");
+                        $("#DOB").val("");
+
+                    },
+                    error:  function(){
+                        alert("Some thing rong");
+                    }
+                })
+
+            })
+
+        })
+
+    </script>
+</head>
+<body>
+    <div class="container"> 
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 border-dark">
+                 
+
+                <label for="Name">Choose a Name:</label>
+
+                <select name="Name" id="Name">
+                    <option class="form-control" value="saab">Saab</option>
+                    <option class="form-control" value="mercedes">Mercedes</option>
+                    <option class="form-control" value="audi">Audi</option>
+                    <option class="form-control" value="volvo">Volvo</option>
+                </select>
+                <br />
+
+                @*<input type="text" class="form-control" id="Name" />*@
+                Mobile Number
+                <input type="text" class="form-control" id="Mobile" />
+                Email
+                <input type="text" class="form-control" id="Email" />
+                Date of Birth
+                <input type="date" class="form-control" id="DOB" />
+                <div class="col-sm-4"></div>
+                <div class="row">
+                    <div class="col-sm-4"><button class="btn btn-success" id="btns"> Save</button></div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"><a href="/Home/Display" class="btn btn-danger" id=" btnd">Show Data</a></div>
+
+
+                </div>
+
+            </div>
+               
+           
+    </div>
+        </div>
+</body>
+</html>
